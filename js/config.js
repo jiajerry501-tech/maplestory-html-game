@@ -1,0 +1,90 @@
+// Game Configuration
+const CONFIG = {
+    CANVAS_WIDTH: 960,
+    CANVAS_HEIGHT: 540,
+    WORLD_WIDTH: 3200,
+    GRAVITY: 0.55,
+    FRICTION: 0.82,
+    MAX_FALL_SPEED: 15,
+
+    PLAYER: {
+        WIDTH: 32,
+        HEIGHT: 48,
+        SPEED: 4.2,
+        JUMP_FORCE: -10.5,
+        MAX_HP: 100,
+        MAX_MP: 50,
+        ATTACK_DAMAGE: 15,
+        ATTACK_RANGE: 50,
+        ATTACK_COOLDOWN: 350,
+        INVINCIBILITY_TIME: 1000,
+    },
+
+    MONSTERS: {
+        SLIME: {
+            name: '蓝色蜗牛',
+            hp: 25,
+            damage: 5,
+            speed: 1.0,
+            exp: 8,
+            width: 36,
+            height: 30,
+            color: '#4FC3F7',
+        },
+        MUSHROOM: {
+            name: '绿蘑菇',
+            hp: 45,
+            damage: 8,
+            speed: 0.8,
+            exp: 18,
+            width: 32,
+            height: 40,
+            color: '#81C784',
+        },
+        RIBBON_PIG: {
+            name: '缎带肥肥',
+            hp: 70,
+            damage: 12,
+            speed: 1.5,
+            exp: 30,
+            width: 44,
+            height: 36,
+            color: '#FFB74D',
+        },
+    },
+
+    PLATFORMS: [
+        // Ground segments (with gaps for pits)
+        { x: 0, y: 470, w: 800, h: 70 },
+        { x: 880, y: 470, w: 900, h: 70 },
+        { x: 1860, y: 470, w: 600, h: 70 },
+        { x: 2540, y: 470, w: 660, h: 70 },
+        // Floating platforms
+        { x: 250, y: 360, w: 160, h: 20 },
+        { x: 550, y: 290, w: 200, h: 20 },
+        { x: 420, y: 200, w: 120, h: 20 },
+        { x: 1000, y: 360, w: 180, h: 20 },
+        { x: 1200, y: 280, w: 160, h: 20 },
+        { x: 1500, y: 340, w: 200, h: 20 },
+        { x: 1700, y: 250, w: 140, h: 20 },
+        { x: 1950, y: 360, w: 160, h: 20 },
+        { x: 2200, y: 290, w: 180, h: 20 },
+        { x: 2400, y: 200, w: 140, h: 20 },
+        { x: 2700, y: 340, w: 160, h: 20 },
+        { x: 2900, y: 260, w: 140, h: 20 },
+    ],
+
+    // Monster spawn points (x, y, type)
+    SPAWN_POINTS: [
+        { x: 300, y: 440, type: 'SLIME' },
+        { x: 600, y: 440, type: 'SLIME' },
+        { x: 1000, y: 440, type: 'MUSHROOM' },
+        { x: 1300, y: 440, type: 'SLIME' },
+        { x: 1500, y: 440, type: 'MUSHROOM' },
+        { x: 1800, y: 440, type: 'SLIME' },
+        { x: 2000, y: 440, type: 'RIBON_PIG' },
+        { x: 2300, y: 440, type: 'MUSHROOM' },
+        { x: 2600, y: 440, type: 'RIBON_PIG' },
+        { x: 2800, y: 440, type: 'SLIME' },
+    ],
+};

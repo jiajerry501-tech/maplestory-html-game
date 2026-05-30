@@ -1,0 +1,21 @@
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Dev
+node_modules/
+dist/
+.env
+.env.local
+
+# Project specific
+*.log
+.claude/
