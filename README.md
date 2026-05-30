@@ -26,7 +26,13 @@
 | `Z` / `J` | 攻击 |
 | `Enter` | 复活（死亡时） |
 
-## 如何运行
+## 在线游玩
+
+🌐 **https://jiajerry501-tech.github.io/maplestory-html-game/**
+
+直接点击链接即可在浏览器中游玩，无需下载任何文件。
+
+## 本地运行
 
 直接用浏览器打开 `index.html` 即可运行，无需任何构建工具或服务器。
 
