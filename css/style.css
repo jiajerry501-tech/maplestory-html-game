@@ -22,6 +22,7 @@ html, body {
 
 #gameCanvas {
     display: block;
+    background: #4A90D9;
     border: 2px solid #2a2a3e;
     border-radius: 4px;
     box-shadow:
@@ -30,30 +31,11 @@ html, body {
         inset 0 0 20px rgba(0, 0, 0, 0.3);
     image-rendering: pixelated;
     cursor: default;
-}
-
-/* Loading state */
-#gameContainer::before {
-    content: '冒险岛加载中...';
-    position: absolute;
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 14px;
-    animation: pulse 1.5s ease-in-out infinite;
-    pointer-events: none;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.8; }
-}
-
-/* Hide loading text once canvas is ready (will be overlaid by canvas) */
-#gameCanvas {
     position: relative;
     z-index: 1;
 }
 
-/* Mobile support: touch area hint */
+/* Mobile support */
 @media (max-width: 768px) {
     #gameContainer {
         align-items: flex-start;
