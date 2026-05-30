@@ -31,7 +31,7 @@
 直接用浏览器打开 `index.html` 即可运行，无需任何构建工具或服务器。
 
 ```bash
-git clone https://github.com/your-username/maplestory-html-game.git
+git clone https://github.com/jiajerry501-tech/maplestory-html-game.git
 cd maplestory-html-game
 # 用浏览器打开 index.html
 ```
