@@ -41,7 +41,7 @@ const CONFIG = {
             height: 40,
             color: '#81C784',
         },
-        RIBBON_PIG: {
+        RIBON_PIG: {
             name: '缎带肥肥',
             hp: 70,
             damage: 12,
