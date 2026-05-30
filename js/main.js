@@ -28,13 +28,14 @@
         );
 
         let prevLevel = 1;
+        let lastTime = 0;
 
-        function update() {
-            player.update(input, gameMap.platforms);
+        function update(dt) {
+            player.update(input, gameMap.platforms, dt);
             camera.follow(player);
 
             for (const monster of monsters) {
-                monster.update(player, gameMap.platforms);
+                monster.update(player, gameMap.platforms, dt);
             }
 
             // Player attack detection
@@ -87,7 +88,10 @@
         }
 
         function render() {
-            ctx.clearRect(0, 0, CONFIG.CANVAS_WIDTH, CONFIG.CANVAS_HEIGHT);
+            // Ensure clean canvas before drawing
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             gameMap.drawBackground(ctx, camera);
             gameMap.drawForeground(ctx, camera);
@@ -117,8 +121,12 @@
             }
         }
 
-        function gameLoop() {
-            update();
+        function gameLoop(timestamp) {
+            // Delta time normalized to 60fps (dt=1 at 60fps)
+            const dt = lastTime ? Math.min((timestamp - lastTime) / 16.667, 3) : 1;
+            lastTime = timestamp;
+
+            update(dt);
             checkLevelUp();
             render();
             input.update();
@@ -135,13 +143,12 @@
 
         window.addEventListener('resize', handleResize);
         handleResize();
-        gameLoop();
+        requestAnimationFrame(gameLoop);
 
         console.log('🎮 MapleStory HTML Game started!');
         console.log('Controls: Arrow Keys/WASD - Move, Space/Up/W - Jump, Z/J - Attack');
     }
 
-    // Wrap in try-catch for debugging
     try {
         init();
     } catch (e) {

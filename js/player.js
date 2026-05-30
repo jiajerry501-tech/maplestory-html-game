@@ -87,14 +87,14 @@ class Player {
         this.invincibleTimer = 2000;
     }
 
-    update(input, platforms) {
-        // Cooldown timers
-        if (this.attackCooldown > 0) this.attackCooldown--;
-        if (this.invincibleTimer > 0) this.invincibleTimer--;
+    update(input, platforms, dt = 1) {
+        // Cooldown timers (frame-rate independent)
+        if (this.attackCooldown > 0) this.attackCooldown -= dt;
+        if (this.invincibleTimer > 0) this.invincibleTimer -= dt;
         else this.isInvincible = false;
         if (this.attackTimer > 0) {
-            this.attackTimer--;
-            if (this.attackTimer === 0) {
+            this.attackTimer -= dt;
+            if (this.attackTimer <= 0) {
                 this.isAttacking = false;
                 this.attackHitbox = null;
             }
@@ -102,27 +102,27 @@ class Player {
 
         if (this.isDead) return;
 
-        // Horizontal movement
+        // Horizontal movement (scaled by dt for consistent speed)
         if (input.left) {
-            this.vx = -CONFIG.PLAYER.SPEED;
+            this.vx = -CONFIG.PLAYER.SPEED * dt;
             this.facingRight = false;
         } else if (input.right) {
-            this.vx = CONFIG.PLAYER.SPEED;
+            this.vx = CONFIG.PLAYER.SPEED * dt;
             this.facingRight = true;
         } else {
-            this.vx *= CONFIG.FRICTION;
+            this.vx *= Math.pow(CONFIG.FRICTION, dt);
             if (Math.abs(this.vx) < 0.1) this.vx = 0;
         }
 
         // Jump
         if (input.jump && this.isOnGround) {
-            this.vy = CONFIG.PLAYER.JUMP_FORCE;
+            this.vy = CONFIG.PLAYER.JUMP_FORCE * dt;
             this.isOnGround = false;
         }
 
-        // Gravity
-        this.vy += CONFIG.GRAVITY;
-        if (this.vy > CONFIG.MAX_FALL_SPEED) this.vy = CONFIG.MAX_FALL_SPEED;
+        // Gravity (scaled by dt)
+        this.vy += CONFIG.GRAVITY * dt;
+        if (this.vy > CONFIG.MAX_FALL_SPEED * dt) this.vy = CONFIG.MAX_FALL_SPEED * dt;
 
         // Attack
         if (input.attack && this.attackCooldown <= 0 && !this.isAttacking) {

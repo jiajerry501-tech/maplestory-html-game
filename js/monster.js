@@ -48,9 +48,9 @@ class Monster {
         this.respawnTimer = 180; // 3 seconds at 60fps
     }
 
-    update(player, platforms) {
+    update(player, platforms, dt = 1) {
         if (this.isDead) {
-            this.respawnTimer--;
+            this.respawnTimer -= dt;
             if (this.respawnTimer <= 0) {
                 this.respawn();
             }
@@ -65,13 +65,13 @@ class Monster {
             this.vx *= -0.8;
         }
 
-        // Adjust direction
-        if (this.vx > 0) this.vx = Math.min(this.vx, this.speed);
-        else this.vx = Math.max(this.vx, -this.speed);
+        // Adjust direction (scaled by dt)
+        if (this.vx > 0) this.vx = Math.min(this.vx, this.speed * dt);
+        else this.vx = Math.max(this.vx, -this.speed * dt);
 
-        // Gravity
-        this.vy += CONFIG.GRAVITY;
-        if (this.vy > CONFIG.MAX_FALL_SPEED) this.vy = CONFIG.MAX_FALL_SPEED;
+        // Gravity (scaled by dt)
+        this.vy += CONFIG.GRAVITY * dt;
+        if (this.vy > CONFIG.MAX_FALL_SPEED * dt) this.vy = CONFIG.MAX_FALL_SPEED * dt;
 
         // Apply physics
         this.x += this.vx;
